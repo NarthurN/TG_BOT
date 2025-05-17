@@ -32,16 +32,28 @@ func (ts *TeamScore) GetScores() string {
 		return "Пока нет результатов. Добавьте участников командой /add [имя]"
 	}
 
-	// Создаем слайс для сортировки
-	type player struct {
+	// // Создаем слайс для сортировки
+	// type player struct {
+	// 	name  string
+	// 	score int
+	// }
+	// var players []player
+
+	// // Заполняем слайс
+	// for name, score := range ts.scores {
+	// 	players = append(players, player{name, score})
+	// }
+
+	var players []struct {
 		name  string
 		score int
 	}
-	var players []player
 
-	// Заполняем слайс
 	for name, score := range ts.scores {
-		players = append(players, player{name, score})
+		players = append(players, struct {
+			name  string
+			score int
+		}{name, score})
 	}
 
 	// Сортируем по убыванию очков
